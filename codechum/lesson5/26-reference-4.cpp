@@ -2,7 +2,7 @@
 using namespace std;
 
 
-void addElement(int* arr, int size, int value);
+int addElement(int* arr, int size, int value);
 
 
 int main() {
@@ -16,10 +16,10 @@ int main() {
   }
 
   cout << "Enter the value to be added: "; cin >> value;
-  addElement(arr, size, value);
+  size = addElement(arr, size, value);
 
   cout << "Updated array:" << endl;
-  for (int i = 0; i < size + 1; i++) {
+  for (int i = 0; i < size; i++) {
     cout << arr[i] << " ";
   } cout << endl;
 
@@ -27,6 +27,7 @@ int main() {
 }
 
 
-void addElement(int* arr, int size, int value) {
+int addElement(int* arr, int size, int value) {
   arr[size] = value;
+  return size + 1;
 }
