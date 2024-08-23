@@ -1,4 +1,4 @@
-#include "../class/21-4-pet.cpp"
+#include "../src/21-4-pet.cpp"
 
 void testCase() {
     int n, test;

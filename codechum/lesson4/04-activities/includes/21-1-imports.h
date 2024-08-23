@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include "../class/21-1-rectangle.cpp"
+#include "../src/21-1-rectangle.cpp"
 using namespace std;
 
 void testCase() {

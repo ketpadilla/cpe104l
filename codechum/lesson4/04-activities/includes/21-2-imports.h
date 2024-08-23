@@ -1,4 +1,4 @@
-#include "../class/21-2-blender.cpp"
+#include "../src/21-2-blender.cpp"
 
 void testCase() {
     string fruit1, fruit2;

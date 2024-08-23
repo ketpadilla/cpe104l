@@ -1,4 +1,4 @@
-#include "../class/21-5-complexCalculator.cpp"
+#include "../src/21-5-complexCalculator.cpp"
 #include <iomanip>
 
 #define print(str) cout << str << endl

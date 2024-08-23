@@ -1,4 +1,4 @@
-#include "../class/21-3-student.cpp"
+#include "../src/21-3-student.cpp"
 
 void testCase() {
     
