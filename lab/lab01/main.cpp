@@ -1,7 +1,7 @@
 #include "includes/helper.h"
 
 int main() {
-  char choice;
+  int choice;
   Inventory inventory;
 
   while (true) {

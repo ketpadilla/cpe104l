@@ -1,5 +1,5 @@
 #include "inventory.h"
-#include <cstdlib>
+
 
 void inputProductID(Inventory inventory, int& productID) {
   if (inventory.getProductCount() != 0) {
@@ -9,32 +9,39 @@ void inputProductID(Inventory inventory, int& productID) {
   return;
 }
 
-char getChoice(char& choice) {
-  cin >> choice;
-  cout << endl;
 
-  return tolower(choice);
+void getChoice(int& choice) {
+  string input;
+  getline(cin, input);
+
+  if (!input.empty()) {
+    choice = int(input[0] - '0');
+  } else {
+    choice = -1;
+  }
 }
+
 
 void contProgram() {
   cout << endl << "Press Enter to continue.";
-  cin.ignore(numeric_limits<streamsize>::max(), '\n');
   cin.get(); 
 }
 
+
 void printMenu() {
   cout << "Inventory Management System" << endl;
-  cout << "a. Add a product" << endl;
-  cout << "b. Remove a product" << endl;
-  cout << "c. Update product information" << endl;
-  cout << "d. View all products" << endl;
-  cout << "e. Calculate total inventory value" << endl;
-  cout << "f. Search for a product by ID" << endl;
-  cout << "g. Exit" << endl << endl;
+  cout << "\033[31m 1. \033[0m Add a product" << endl;
+  cout << "\033[31m 2. \033[0m Remove a product" << endl;
+  cout << "\033[31m 3. \033[0m Update product information" << endl;
+  cout << "\033[31m 4. \033[0m View all products" << endl;
+  cout << "\033[31m 5. \033[0m Calculate total inventory value" << endl;
+  cout << "\033[31m 6. \033[0m Search for a product by ID" << endl;
+  cout << "\033[31m 7. \033[0m Exit" << endl << endl;
   cout << "Enter your choice: ";
 }
 
-Inventory manageInventory(char choice, Inventory &inventory) {
+
+Inventory manageInventory(int choice, Inventory &inventory) {
   int productID, quantity;
   string name;
   double price;
@@ -42,7 +49,7 @@ Inventory manageInventory(char choice, Inventory &inventory) {
   Product product;
 
   switch (choice) {
-    case 'a':
+    case 1:
       GET("Product ID", productID);
       GET("Name", name);
       GET("Quantity", quantity);
@@ -55,31 +62,31 @@ Inventory manageInventory(char choice, Inventory &inventory) {
 
       inventory.addProduct(product);
       break;
-    case 'b':
+    case 2:
       inputProductID(inventory, productID);
       inventory.removeProduct(productID);
 
       break;
-    case 'c':
+    case 3:
       inputProductID(inventory, productID);
       inventory.updateProduct(productID);
     
       break;
-    case 'd':
+    case 4:
       inventory.displayInventory();
 
       break;
-    case 'e':
+    case 5:
       price = inventory.calculateTotalValue(0);
       cout << price << endl;
     
       break;
-    case 'f':
+    case 6:
       inputProductID(inventory, productID);
       inventory.searchProduct(productID);
     
       break;
-    case 'g':
+    case 7:
       system("clear");
       cout << "Exiting Program." << endl;
       exit(0);
