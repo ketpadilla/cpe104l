@@ -1,3 +1,8 @@
+//Header File: helper.h 
+
+#ifndef H_Helper
+#define H_Helper
+
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -5,14 +10,16 @@
 #include "./linkedStack.h"
 using namespace std;
 
+  // get input from user
 void getInput(string& expr) {
   cout << "ENTER NUMBERS " // ask for input 
       << endl << "(Separate with spaces and end with \" ;\")"
       << endl << endl << ":: ";
 
   getline(cin, expr);
-}
+}//end getInput
 
+  // process numbers individually based on given logic
 void processNum(linkedStack<int>& stack, linkedQueue<int>& queue, string& expr, int& num) {
   stringstream s(expr); // convert into an arr of inputs
   
@@ -28,4 +35,6 @@ void processNum(linkedStack<int>& stack, linkedQueue<int>& queue, string& expr, 
       stack.push(num * num); 
     }
   }
-}
+} //end processNum 
+
+#endif
