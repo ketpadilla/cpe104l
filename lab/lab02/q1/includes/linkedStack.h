@@ -53,7 +53,11 @@ public:
       //               element is removed from the stack.
 
     void print();
-      //! ...
+      //Function to print all the elements of the stack in a single line.
+      //Precondition: The stack exists.
+      //Postcondition: If the stack is empty, the program 
+      //               continues wihout printing; otherwise, 
+      //               all elements of the stack are printed.
 
     linkedStack(); 
       //Default constructor
@@ -157,6 +161,7 @@ void linkedStack<Type>::print()
 {
     nodeType<Type> *temp = stackTop;
 
+    cout << "Stack: ";
     while (temp != nullptr) 
     {
         cout << temp->info << " ";

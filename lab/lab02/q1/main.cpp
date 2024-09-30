@@ -1,34 +1,19 @@
-#include <iostream>
-#include "includes/linkedQueue.h"
-#include "includes/linkedStack.h"
-using namespace std;
+#include "includes/helper.h"
 
 int main() {
   linkedStack<int> stack;
 	linkedQueue<int> queue;
-	int num, MAX = 12;
+	int num;
+  string expr;
 
-  cout << "Enter " << MAX << " numbers: ";
-
-  for (int i = 0; i < MAX; i++) {
-  cin >> num;
-
-  if (num % 2 == 0) {
-    stack.push(num);
-  } else if (num % 2 != 0 && num % 3 == 0) {
-    queue.addQueue(num);
-  } else {
-    stack.pop();
-    stack.push(num * num);
-  }
-  }
+  system("clear"); 
+  getInput(expr);
+  processNum(stack, queue, expr, num);
 
   cout << endl;
-  cout << "Stack: ";
   stack.print();
-
-  cout << "Queue: ";
-  queue.print();
+  queue.print(); 
+  cout << endl;
 
   return 0;
 }

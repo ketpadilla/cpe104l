@@ -60,10 +60,16 @@ public:
       //               element is removed from the queue.
 
     void print();
-    // ! ...
+      //Function to print all the elements of the queue in a single line.
+      //Precondition: The queue exists.
+      //Postcondition: If the queue is empty, the program 
+      //               continues wihout printing; otherwise, 
+      //               all elements of the queue are printed.
 
     void copyQueue(const linkedQueue<Type>& otherQueue);
-    // ! ...
+      //Function to make a copy of otherQueue.
+      //Postcondition: A copy of otherQueue is created and
+      //               assigned to this queue.
 
     linkedQueue(); 
       //Default constructor
@@ -183,6 +189,7 @@ void linkedQueue<Type>::print()
 {
     nodeType<Type> *current = queueFront;
 
+    cout << "Queue: ";
     while (current != nullptr) 
     {
         cout << current->info << " ";
