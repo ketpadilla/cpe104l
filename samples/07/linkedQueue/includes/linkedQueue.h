@@ -19,11 +19,11 @@ struct nodeType
 
 
 template <class Type>
-class linkedQueueType: public queueADT<Type>
+class linkedQueue: public queueADT<Type>
 {
 public:
-    const linkedQueueType<Type>& operator=
-                    (const linkedQueueType<Type>&); 
+    const linkedQueue<Type>& operator=
+                    (const linkedQueue<Type>&); 
       //Overload the assignment operator.
 
     bool isEmptyQueue() const;
@@ -66,16 +66,20 @@ public:
       //Postcondition: The queue is changed and the first 
       //               element is removed from the queue.
 
-    linkedQueueType(); 
+    linkedQueue(); 
       //Default constructor
 
-    linkedQueueType(const linkedQueueType<Type>& otherQueue); 
+    linkedQueue(const linkedQueue<Type>& otherQueue); 
       //Copy constructor
 
-    ~linkedQueueType(); 
+    ~linkedQueue(); 
       //Destructor
 
 private:
+    void copyQueue(const linkedQueue<Type>& otherQueue);
+      //Function to make a copy of otherQueue.
+      //Postcondition: A copy of otherQueue is created and
+      //               assigned to this queue.
     nodeType<Type> *queueFront; //pointer to the front of 
                                 //the queue
     nodeType<Type> *queueRear;  //pointer to the rear of 
@@ -84,26 +88,26 @@ private:
 
     //Default constructor
 template <class Type>
-linkedQueueType<Type>::linkedQueueType() 
+linkedQueue<Type>::linkedQueue() 
 {
     queueFront = nullptr; //set front to nullptr
     queueRear = nullptr;  //set rear to nullptr
 } //end default constructor
 
 template <class Type>
-bool linkedQueueType<Type>::isEmptyQueue() const
+bool linkedQueue<Type>::isEmptyQueue() const
 {
     return (queueFront == nullptr);
 } //end isEmptyQueue
 
 template <class Type>
-bool linkedQueueType<Type>::isFullQueue() const
+bool linkedQueue<Type>::isFullQueue() const
 {
     return false;
 } //end isFullQueue
 
 template <class Type>
-void linkedQueueType<Type>::initializeQueue()
+void linkedQueue<Type>::initializeQueue()
 {
     nodeType<Type> *temp;
 
@@ -122,7 +126,7 @@ void linkedQueueType<Type>::initializeQueue()
 
 
 template <class Type>
-void linkedQueueType<Type>::addQueue(const Type& newElement)
+void linkedQueue<Type>::addQueue(const Type& newElement)
 {
     nodeType<Type> *newNode;
 
@@ -145,21 +149,21 @@ void linkedQueueType<Type>::addQueue(const Type& newElement)
 }//end addQueue
 
 template <class Type>
-Type linkedQueueType<Type>::front() const
+Type linkedQueue<Type>::front() const
 {
     assert(queueFront != nullptr);
     return queueFront->info; 
 } //end front
 
 template <class Type>
-Type linkedQueueType<Type>::back() const
+Type linkedQueue<Type>::back() const
 {
     assert(queueRear!= nullptr);
     return queueRear->info;
 } //end back
 
 template <class Type>
-void linkedQueueType<Type>::deleteQueue()
+void linkedQueue<Type>::deleteQueue()
 {
     nodeType<Type> *temp;
    
@@ -175,32 +179,70 @@ void linkedQueueType<Type>::deleteQueue()
                                    //queue is empty
             queueRear = nullptr;   //set queueRear to nullptr
     }
-    else
+    else 
         cout << "Cannot remove from an empty queue" << endl;
 }//end deleteQueue
 
+template <class Type>
+void linkedQueue<Type>::copyQueue(const linkedQueue<Type>& otherQueue)
+{
+    if (otherQueue.queueFront == nullptr) // if the other queue is empty
+    {
+        queueFront = nullptr;
+        queueRear = nullptr;
+    }
+    else
+    {
+        // Create a copy of the front node of the other queue
+        nodeType<Type>* newNode;
+        nodeType<Type>* current = otherQueue.queueFront; // pointer to traverse the other queue
+
+        queueFront = new nodeType<Type>;  // create the first node
+        queueFront->info = current->info; // copy the data
+        queueFront->link = nullptr;
+        queueRear = queueFront;           // queueRear also points to the first node
+        current = current->link;          // move to the next node in otherQueue
+
+        // Copy the remaining nodes in otherQueue
+        while (current != nullptr)
+        {
+            newNode = new nodeType<Type>; // create a new node
+            newNode->info = current->info; // copy the data
+            newNode->link = nullptr;
+            queueRear->link = newNode;    // attach newNode to the rear of this queue
+            queueRear = newNode;          // move the rear pointer
+            current = current->link;      // move to the next node in otherQueue
+        }
+    }
+}
 
     //Destructor
 template <class Type>
-linkedQueueType<Type>::~linkedQueueType() 
+linkedQueue<Type>::~linkedQueue() 
 {
-    //Write the definition of the destructor
+    deleteQueue();
 } //end destructor
 
 template <class Type>
-const linkedQueueType<Type>& linkedQueueType<Type>::operator=
-                    (const linkedQueueType<Type>& otherQueue)
+const linkedQueue<Type>& linkedQueue<Type>::operator=
+                    (const linkedQueue<Type>& otherQueue)
 {
-    //Write the definition of to overload the assignment operator
+    if (this != &otherQueue) //avoid self-copy
+    {
+        copyQueue(otherQueue);
+    }//end else
+
+     return *this; 
 
 } //end assignment operator
 
 	//copy constructor
 template <class Type>
-linkedQueueType<Type>::linkedQueueType
-                 (const linkedQueueType<Type>& otherQueue) 
+linkedQueue<Type>::linkedQueue
+                 (const linkedQueue<Type>& otherQueue) 
 {
-    //Write the definition of the copy constructor
-}//end copy constructor
+    queueFront = nullptr;
+    copyQueue(otherQueue);
+}//end copy constructors; 
 
 #endif

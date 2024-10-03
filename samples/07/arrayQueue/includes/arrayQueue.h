@@ -1,4 +1,4 @@
-//Header file QueueAsArray
+//Header file: arrayQueue.h
  
 #ifndef H_QueueAsArray
 #define H_QueueAsArray
@@ -11,10 +11,10 @@
 using namespace std;
 
 template <class Type>
-class queueType: public queueADT<Type>
+class queueArray: public queueADT<Type>
 {
 public:
-    const queueType<Type>& operator=(const queueType<Type>&); 
+    const queueArray<Type>& operator=(const queueArray<Type>&); 
       //Overload the assignment operator.
 
     bool isEmptyQueue() const;
@@ -56,16 +56,20 @@ public:
       //Postcondition: The queue is changed and the first 
       //               element is removed from the queue.
 
-    queueType(int queueSize = 100); 
+    queueArray(int queueSize = 100); 
       //Constructor
 
-    queueType(const queueType<Type>& otherQueue); 
+    queueArray(const queueArray<Type>& otherQueue); 
       //Copy constructor
 
-    ~queueType(); 
+    ~queueArray(); 
       //Destructor
 
 private:
+    void copyQueue(const queueArray<Type>& otherQueue);
+      //Function to make a copy of otherQueue.
+      //Postcondition: A copy of otherQueue is created and
+      //               assigned to this queue.
     int maxQueueSize; //variable to store the maximum queue size
     int count;        //variable to store the number of
                       //elements in the queue
@@ -78,19 +82,19 @@ private:
 };
 
 template <class Type>
-bool queueType<Type>::isEmptyQueue() const
+bool queueArray<Type>::isEmptyQueue() const
 {
     return (count == 0);
 } //end isEmptyQueue
 
 template <class Type>
-bool queueType<Type>::isFullQueue() const
+bool queueArray<Type>::isFullQueue() const
 {
     return (count == maxQueueSize);
 } //end isFullQueue
 
 template <class Type>
-void queueType<Type>::initializeQueue()
+void queueArray<Type>::initializeQueue()
 {
     queueFront = 0;
     queueRear = maxQueueSize - 1;
@@ -98,21 +102,21 @@ void queueType<Type>::initializeQueue()
 } //end initializeQueue
 
 template <class Type>
-Type queueType<Type>::front() const
+Type queueArray<Type>::front() const
 {
     assert(!isEmptyQueue());
     return list[queueFront]; 
 } //end front
 
 template <class Type>
-Type queueType<Type>::back() const
+Type queueArray<Type>::back() const
 {
     assert(!isEmptyQueue());
     return list[queueRear];
 } //end back
 
 template <class Type>
-void queueType<Type>::addQueue(const Type& newElement)
+void queueArray<Type>::addQueue(const Type& newElement)
 {
     if (!isFullQueue())
     {   
@@ -127,7 +131,7 @@ void queueType<Type>::addQueue(const Type& newElement)
 } //end addQueue
 
 template <class Type>
-void queueType<Type>::deleteQueue()
+void queueArray<Type>::deleteQueue()
 {
     if (!isEmptyQueue())
     {   
@@ -142,7 +146,7 @@ void queueType<Type>::deleteQueue()
 
     //Constructor
 template <class Type>
-queueType<Type>::queueType(int queueSize)   
+queueArray<Type>::queueArray(int queueSize)   
 {
     if (queueSize <= 0)
     {
@@ -163,26 +167,56 @@ queueType<Type>::queueType(int queueSize)
                                     //hold the queue elements
 } //end constructor
 
+template <class Type>
+void queueArray<Type>::copyQueue(const queueArray<Type>& otherQueue)
+{
+
+    if (list != nullptr) //if the list if nonempty, make it empty 
+        delete[] list;
+
+    maxQueueSize = otherQueue.maxQueueSize; // copy constructor components of otherQueue
+    count = otherQueue.count;
+    queueFront = otherQueue.queueFront;
+    queueRear = otherQueue.queueRear;
+
+    if (otherQueue.count == 0) //otherQueue is empty
+    {
+        list = nullptr; // no allocation required
+        return;
+    }//end else
+    
+    list = new Type[maxQueueSize]; // create queue
+
+      // copy elements from otherQueue
+    for (int i = 0; i < maxQueueSize; i++) 
+        list[i] = otherQueue.list[i];
+} //end copyQueue
+
     //Destructor
 template <class Type>
-queueType<Type>::~queueType()   
+queueArray<Type>::~queueArray()   
 {
     delete [] list;
 } //end destructor
 
+          //overload the assignment operator
 template <class Type>
-const queueType<Type>& queueType<Type>::operator=
-	                   (const queueType<Type>& otherQueue)
+const queueArray<Type>& queueArray<Type>::operator=
+	                   (const queueArray<Type>& otherQueue)
 {
-    cout << "Write the definition of the function "
-         << "to overload the assignment operator." << endl;
+    if (this != &otherQueue) //avoid self-copy
+    {
+      copyQueue(otherQueue);
+    }//end else
+
+    return *this;
 } //end assignment operator
 
 template <class Type>
-queueType<Type>::queueType(const queueType<Type>& otherQueue)
+queueArray<Type>::queueArray(const queueArray<Type>& otherQueue)
 {
-    cout << "Write the definition of the copy constructor."
-         << endl;
+    list = nullptr;
+    copyQueue(otherQueue);
 } //end copy constructor
 
 #endif
