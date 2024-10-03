@@ -1,14 +1,19 @@
+/* // * TASK
+  Create a program that prints the middle number
+    of three unique user-inputted numbers
+*/
+
 #include <iostream>
 using namespace std;
 
-#define ask(var) cout << #var << ": "; cin >> var;
+#define ask(var) cout << #var << ": "; cin >> var; //end ask
 
 int main() {
   int num1, num2, num3, mid;
   cout << "Enter three numbers: " << endl;
-  ask(num1); ask(num2); ask(num3);
+  ask(num1); ask(num2); ask(num3); // prompt inputs
 
-  //! assumes 3 unique numbers are inputted
+    // find middle num
   if ((num1 > num2 && num1 < num3) || (num1 < num2 && num1 > num3)) {
     mid = num1;
   } else if ((num2 > num1 && num2 < num3) || (num2 < num1 && num2 > num3)) {
@@ -17,6 +22,6 @@ int main() {
     mid = num3;
   } 
   
-  cout << "Middle Number: " << mid << endl;
+  cout << "Middle Number: " << mid << endl; // print middle num
   return 0;
 }
