@@ -1,5 +1,5 @@
-#ifndef H_LinkedListType
-#define H_LinkedListType
+#ifndef H_linkedList
+#define H_linkedList
    
 #include <iostream>
 #include <cassert>
@@ -96,14 +96,14 @@ bool linkedListIterator<Type>::operator!=
 }
 
 
-//*****************  class linkedListType   ****************
+//*****************  class linkedList   ****************
 
 template <class Type>
-class linkedListType
+class linkedList
 {
 public:
-    const linkedListType<Type>& operator=
-                         (const linkedListType<Type>&);  
+    const linkedList<Type>& operator=
+                         (const linkedList<Type>&);  
       //Overload the assignment operator.
 
     void initializeList(); 
@@ -185,16 +185,16 @@ public:
       //Postcondition: Returns an iterator such that current 
       //               is set to nullptr.
 
-    linkedListType(); 
+    linkedList(); 
       //Default constructor
       //Initializes the list to an empty state.
       //Postcondition: first = nullptr, last = nullptr, 
       //               count = 0; 
 
-    linkedListType(const linkedListType<Type>& otherList); 
+    linkedList(const linkedList<Type>& otherList); 
       //copy constructor
 
-    ~linkedListType();   
+    ~linkedList();   
       //Destructor
       //Deletes all the nodes from the list.
       //Postcondition: The list object is destroyed. 
@@ -206,7 +206,7 @@ protected:
     nodeType<Type> *last;  //pointer to the last node of the list
 
 private: 
-    void copyList(const linkedListType<Type>& otherList); 
+    void copyList(const linkedList<Type>& otherList); 
       //Function to make a copy of otherList.
       //Postcondition: A copy of otherList is created and
       //               assigned to this list.
@@ -214,13 +214,13 @@ private:
 
 
 template <class Type>
-bool linkedListType<Type>::isEmptyList() const
+bool linkedList<Type>::isEmptyList() const
 {
     return (first == nullptr);
 }
 
 template <class Type>
-linkedListType<Type>::linkedListType() //default constructor
+linkedList<Type>::linkedList() //default constructor
 {
     first = nullptr;
     last = nullptr;
@@ -228,7 +228,7 @@ linkedListType<Type>::linkedListType() //default constructor
 }
 
 template <class Type>
-void linkedListType<Type>::destroyList()
+void linkedList<Type>::destroyList()
 {
     nodeType<Type> *temp;   //pointer to deallocate the memory
                             //occupied by the node
@@ -244,13 +244,13 @@ void linkedListType<Type>::destroyList()
 }
 
 template <class Type>
-void linkedListType<Type>::initializeList()
+void linkedList<Type>::initializeList()
 {
 	destroyList(); //if the list has any nodes, delete them
 }
 
 template <class Type>
-void linkedListType<Type>::print() const
+void linkedList<Type>::print() const
 {
     nodeType<Type> *current; //pointer to traverse the list
 
@@ -264,13 +264,13 @@ void linkedListType<Type>::print() const
 }//end print
 
 template <class Type>
-int linkedListType<Type>::length() const
+int linkedList<Type>::length() const
 {
     return count;
 }  //end length
 
 template <class Type>
-Type linkedListType<Type>::front() const
+Type linkedList<Type>::front() const
 {   
     assert(first != nullptr);
 
@@ -278,7 +278,7 @@ Type linkedListType<Type>::front() const
 }//end front
 
 template <class Type>
-Type linkedListType<Type>::back() const
+Type linkedList<Type>::back() const
 {   
     assert(last != nullptr);
 
@@ -286,7 +286,7 @@ Type linkedListType<Type>::back() const
 }//end back
 
 template <class Type>
-linkedListIterator<Type> linkedListType<Type>::begin()
+linkedListIterator<Type> linkedList<Type>::begin()
 {
     linkedListIterator<Type> temp(first);
 
@@ -294,7 +294,7 @@ linkedListIterator<Type> linkedListType<Type>::begin()
 }
 
 template <class Type>
-linkedListIterator<Type> linkedListType<Type>::end()
+linkedListIterator<Type> linkedList<Type>::end()
 {
     linkedListIterator<Type> temp(nullptr);
 
@@ -302,8 +302,8 @@ linkedListIterator<Type> linkedListType<Type>::end()
 }
 
 template <class Type>
-void linkedListType<Type>::copyList
-                   (const linkedListType<Type>& otherList) 
+void linkedList<Type>::copyList
+                   (const linkedList<Type>& otherList) 
 {
     nodeType<Type> *newNode; //pointer to create a node
     nodeType<Type> *current; //pointer to traverse the list
@@ -351,14 +351,14 @@ void linkedListType<Type>::copyList
 }//end copyList
 
 template <class Type>
-linkedListType<Type>::~linkedListType() //destructor
+linkedList<Type>::~linkedList() //destructor
 {
    destroyList();
 }//end destructor
 
 template <class Type>
-linkedListType<Type>::linkedListType
-                      (const linkedListType<Type>& otherList)
+linkedList<Type>::linkedList
+                      (const linkedList<Type>& otherList)
 {
     first = nullptr;
     copyList(otherList);
@@ -366,8 +366,8 @@ linkedListType<Type>::linkedListType
 
          //overload the assignment operator
 template <class Type>
-const linkedListType<Type>& linkedListType<Type>::operator=
-                      (const linkedListType<Type>& otherList)
+const linkedList<Type>& linkedList<Type>::operator=
+                      (const linkedList<Type>& otherList)
 { 
     if (this != &otherList) //avoid self-copy
     {

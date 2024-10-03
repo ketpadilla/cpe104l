@@ -1,3 +1,5 @@
+//Header file arrayList.h
+
 #ifndef H_arrayList
 #define H_arrayList 
  

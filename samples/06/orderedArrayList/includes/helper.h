@@ -1,3 +1,8 @@
+//Header file helper.h
+ 
+#ifndef H_Helper
+#define H_Helper 
+
 #include <iostream>
 #include <sstream>
 #include "./orderedArrayList.h"
@@ -42,3 +47,5 @@ void replaceElement(orderedArrayList& list) {
 
   list.replaceAt(list.seqSearch(oldItem), repItem);
 } //end replaceElement
+
+#endif

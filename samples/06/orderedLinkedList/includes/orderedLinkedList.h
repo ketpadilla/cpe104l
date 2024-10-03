@@ -6,7 +6,7 @@
 using namespace std; 
  
 template <class Type>
-class orderedLinkedList: public linkedListType<Type>
+class orderedLinkedList: public linkedList<Type>
 {
 public:
     bool search(const Type& searchItem) const; 
