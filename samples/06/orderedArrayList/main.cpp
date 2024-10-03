@@ -1,46 +1,23 @@
 /* // * TASK
-  Write the definitions of the functions of the class orderedArrayList
-  and write a program that tests the functions on the following data input: 
-    21 10 56 43 78 11 20 18
+Write the definitions of the functions of the class orderedArrayList
+and write a program that tests the functions on the following data input: 
+  21 10 56 43 78 11 20 18
 */
 
-#include <iostream>
-#include <sstream>
-#include "includes/orderedArrayList.h"
-using namespace std;
- 
+#include "includes/helper.h"
+
 int main() {
-    //! ABSTRACT THEN FIX SORTING IMPLEMENTATION
-    orderedArrayList list(8);
-    string input;
-    int num, repItem, loc;
+  orderedArrayList list(8);
+  system("clear");
 
-    system("clear");
-    cout << "ENTER 8 INTEGERS " // ask for input 
-    << endl << "(Separate with spaces)"
-    << endl << endl << ":: ";
-    getline(cin, input);
+  initilizeList(list);
+  list.print();
 
-    int i = 0;
-    stringstream s(input);
-    while (s >> num) {
-        list.insert(num);    
-    }
+  replaceElement(list);
+  list.print();
 
-    cout << endl;
-    list.print();
+  removeElement(list);
+  list.print();
 
-    cout << endl 
-        << "Replace an integer" << endl
-        << ":: Location [1-7]: ";
-    cin >> loc;
-
-    cout << ":: Integer: ";
-    cin >> repItem;
-    list.replaceAt((loc - 1), repItem);
-
-    cout << "NEW ";
-    list.print();
-
-	return 0;   
+return 0;   
 }

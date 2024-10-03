@@ -69,35 +69,10 @@ void orderedArrayList::replaceAt(int location, int repItem)
     if (location < 0 || location >= length) {
         cout << "The location of the item to be "
              << "replaced is out of range." << endl;
-        return;
+    } else {
+        remove(list[location]); // remove old item
+        insert(repItem); // insert new item
     }
-
-        // replace item then sort
-    int temp = list[location];
-    list[location] = repItem; 
-
-    if (repItem > temp) { // shift elements greater than repItem by one position down
-        for (int i = location + 1; i < length; i++) {
-            if (list[i] > repItem) {
-                for (int j = length; j > i; j--) {
-                    list[j] = list[j - 1];
-                }
-            
-                list[i - 1] = repItem;
-            }
-        }
-    } else if (repItem < temp) { // shift elements less than repItem by one position up
-        for (int i = location - 1; i >= 0; i--) {
-            if (list[i] < repItem) {
-                for (int j = length; j > i + 1; j--) {
-                    list[j] = list[j - 1];
-                }
-                list[i + 1] = repItem;
-            }
-        }
-    }
-
-    return;
 } //end replaceAt
 
 int orderedArrayList::seqSearch(int searchItem) const 
@@ -122,7 +97,7 @@ int orderedArrayList::seqSearch(int searchItem) const
 void orderedArrayList::remove(int removeItem)
 {
     int loc;
-
+    
     if (length == 0)
         cout << "Cannot delete from an empty list." << endl;
     else
@@ -139,7 +114,8 @@ void orderedArrayList::remove(int removeItem)
 
 void orderedArrayList::print()
 {
-    cout << "ORDERED LIST" << endl
+    cout << endl 
+        << "ORDERED LIST" << endl
         << ":: ";
     for (int i = 0; i < length; i++) {
         cout << list[i] << " ";
