@@ -11,8 +11,8 @@ int main() {
   int sentinel = -999, oddCounter = 0 , evenCounter = 0, num = 0;
 
   system("clear");
-  cout << "ENTER A SEQUENCE ON NUMBERS" << endl;
-  cout << "(Enter -999 to exit)" << endl;
+  cout << "ENTER A SEQUENCE ON NUMBERS" << endl
+    << "(Enter -999 to exit)" << endl;
 
   cout << ":: "; cin >> num;
   while (num != sentinel) {
