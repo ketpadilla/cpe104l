@@ -1,7 +1,10 @@
-// directives
+/* // * TASK
+  Create program that prints a right triangle using "*".
+    The triangle should only have 5-10 rows.
+*/
+
 #include "includes/helper.h"
 
-// main
 int main() {
   int size;
 
