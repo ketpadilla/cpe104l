@@ -1,3 +1,8 @@
+//Header File: insertionSort.h
+
+#ifndef H_insertionSort
+#define H_insertionSort 
+
 #include <iostream>
 using namespace std;
 
@@ -42,3 +47,5 @@ void insertionSort(elemType list[], int length)
         printListIteration(list, length, firstOutOfOrder);
     }
 } //end insertionSort
+
+#endif
